@@ -1,0 +1,17 @@
+circuit map - circuit description
+race date including qualifying, p1,p2,p3
+no. of round in that season
+Winner's of the race.
+
+score drivers gained in that race
+no. of wins winning driver had in that circuit
+
+fastest lap
+
+winner of last 5 seasons
+
+fastest pit stop
+
+//not_available
+optimal pit stop staregies
+type of tyres used in the race
