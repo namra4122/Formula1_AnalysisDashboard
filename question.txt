@@ -15,3 +15,13 @@ fastest pit stop
 //not_available
 optimal pit stop staregies
 type of tyres used in the race
+
+
+
+I am currently putting together a dashboard for formula 1 analysis. Permit me to explain how the application is organised.
+Right now, I have two dropdown menus. The first one contains a list of years in which the formula one season was held.
+The data for the menu is obtained from an API. Currently, the value that is selected from the first dropdown menu is used as a
+parameter for the other api that we will use to add data to the second dropdown menu. This entire section is functioning wonderfully,
+but now I would like to add photographs of the circuit. Could you assist me in locating the images of the circuit that the user 
+has chosen to display? I need some form of application programming interface (API) or map API so that I may show that circuit 
+within my application by using latitudes and longitudes.
