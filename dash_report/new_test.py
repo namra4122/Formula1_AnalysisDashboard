@@ -1,14 +1,24 @@
+import requests
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import dcc, html
 
 app = dash.Dash()
 
-circuit_lat = 46.9589  # Replace with actual latitude value for selected circuit
-circuit_lon = 7.40194  # Replace with actual longitude value for selected circuit
+circuit_name = ("Jeddah Corniche Circuit",)
+locality_name = "Jeddah"  # Replace with actual locality name value for selected circuit
+country_name = (
+    "Saudi Arabia"  # Replace with actual country name value for selected circuit
+)
 
+geocode_url = f"https://nominatim.openstreetmap.org/search?q={circuit_name}+{locality_name}+{country_name}&format=json"
 
-osm_url = f"https://www.openstreetmap.org/export/embed.html?bbox={circuit_lon},{circuit_lat},{circuit_lon},{circuit_lat}&layer=mapnik"
+response_json = requests.get(geocode_url).json()
+if len(response_json) > 0:
+    location_data = response_json[0]
+    circuit_lat = float(location_data["lat"])
+    circuit_lon = float(location_data["lon"])
+
+osm_url = f"https://www.openstreetmap.org/export/embed.html?bbox={circuit_lon-0.01},{circuit_lat-0.01},{circuit_lon+0.01},{circuit_lat+0.01}&layer=mapnik"
 
 app.layout = html.Div(
     [
@@ -23,7 +33,7 @@ app.layout = html.Div(
         ),
         dcc.Dropdown(id="circuit-dropdown"),
         html.Br(),
-        html.Iframe(src=osm_url, style={"height": "300px", "width": "100%"}),
+        html.Iframe(src=osm_url, style={"height": "300px", "width": "10%"}),
     ]
 )
 

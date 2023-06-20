@@ -22,6 +22,8 @@ def fetch_season_data():
     for season in seasons:
         season_data.append(int(season["season"]))
 
+    season_data.sort(reverse=True)
+
     return season_data
 
 
@@ -54,6 +56,8 @@ app.layout = html.Div(
         dcc.Dropdown(
             id="race_dropdown", value=None, style={"height": "30px", "width": "250px"}
         ),
+        html.Br(),
+        # html.
     ],
     style={"padding-left": "15px", "padding-top": "15px"},
 )
@@ -68,6 +72,19 @@ def update_race_value(season_value):
         # Fetch the options for the race dropdown based on the selected value in the season dropdown
         race_value = fetch_race_data(season_value)
         return race_value
+
+
+# @app.callback(Output(), Input())
+# def update_circuitImg(name, locality, country):
+#     geocode_url = f"https://nominatim.openstreetmap.org/search?q={name}+{locality}+{country}&format=json"
+#     response_json = requests.get(geocode_url).json()
+#     if len(response_json) > 0:
+#         location_data = response_json[0]
+#         circuit_lat = float(location_data["lat"])
+#         circuit_lon = float(location_data["lon"])
+
+#     osm_url = f"https://www.openstreetmap.org/export/embed.html?bbox={circuit_lon-0.01},{circuit_lat-0.01},{circuit_lon+0.01},{circuit_lat+0.01}&layer=mapnik"
+#     return osm_url
 
 
 if __name__ == "__main__":
