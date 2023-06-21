@@ -56,7 +56,22 @@ app.layout = html.Div(
             id="race_dropdown", value=None, style={"height": "30px", "width": "250px"}
         ),
         html.Br(),
-        html.Iframe(id="circuit_map", style={"height": "300px", "width": "10%"}),
+        html.Div(
+            [
+                html.Iframe(
+                    id="circuit_map",
+                    style={
+                        "height": "350px",
+                        "width": "25%",
+                        "display": "inline=block",
+                    },
+                ),
+                html.P(
+                    "HELLLO THIS IS TEstHELLLO THIS IS TEstHELLLO THIS IS TEstHELLLO THIS IS TEst",
+                    style={"display": "inline-block"},
+                ),
+            ]
+        ),
     ],
     style={"padding-left": "15px", "padding-top": "15px"},
 )

@@ -1,39 +1,42 @@
-import requests
 import dash
-from dash import dcc, html
+import dash_core_components as dcc
+import dash_html_components as html
+import plotly.express as px
+import random
 
-app = dash.Dash()
+app = dash.Dash(__name__)
 
-circuit_name = ("Jeddah Corniche Circuit",)
-locality_name = "Jeddah"  # Replace with actual locality name value for selected circuit
-country_name = (
-    "Saudi Arabia"  # Replace with actual country name value for selected circuit
-)
-
-geocode_url = f"https://nominatim.openstreetmap.org/search?q={circuit_name}+{locality_name}+{country_name}&format=json"
-
-response_json = requests.get(geocode_url).json()
-if len(response_json) > 0:
-    location_data = response_json[0]
-    circuit_lat = float(location_data["lat"])
-    circuit_lon = float(location_data["lon"])
-
-osm_url = f"https://www.openstreetmap.org/export/embed.html?bbox={circuit_lon-0.01},{circuit_lat-0.01},{circuit_lon+0.01},{circuit_lat+0.01}&layer=mapnik"
+# Generate random map image and description
+map_options = ["World", "USA", "Europe", "Asia", "Africa"]
+map_choice = random.choice(map_options)
+if map_choice == "World":
+    img_url = "https://www.worldatlas.com/r/w1200-h630-c1200x630/upload/6a/8c/6d/world-map.jpg"
+    description = "This is a map of the world."
+elif map_choice == "USA":
+    img_url = (
+        "https://www.worldatlas.com/r/w1200-h630-c1200x630/upload/6a/8c/6d/usa-map.jpg"
+    )
+    description = "This is a map of the United States of America."
+elif map_choice == "Europe":
+    img_url = "https://www.worldatlas.com/r/w1200-h630-c1200x630/upload/6a/8c/6d/europe-map.jpg"
+    description = "This is a map of Europe."
+elif map_choice == "Asia":
+    img_url = (
+        "https://www.worldatlas.com/r/w1200-h630-c1200x630/upload/6a/8c/6d/asia-map.jpg"
+    )
+    description = "This is a map of Asia."
+else:
+    img_url = "https://www.worldatlas.com/r/w1200-h630-c1200x630/upload/6a/8c/6d/africa-map.jpg"
+    description = "This is a map of Africa."
 
 app.layout = html.Div(
     [
-        dcc.Dropdown(
-            id="year-dropdown",
-            options=[
-                {"label": "2019", "value": "2019"},
-                {"label": "2020", "value": "2020"},
-                {"label": "2021", "value": "2021"},
-            ],
-            value="2019",
+        html.Div(
+            [html.Img(src=img_url)], style={"width": "50%", "display": "inline-block"}
         ),
-        dcc.Dropdown(id="circuit-dropdown"),
-        html.Br(),
-        html.Iframe(src=osm_url, style={"height": "300px", "width": "10%"}),
+        html.Div(
+            [html.P(description)], style={"width": "50%", "display": "inline-block"}
+        ),
     ]
 )
 
