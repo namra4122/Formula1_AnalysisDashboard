@@ -35,7 +35,7 @@ def fetch_race_data(selected_value):
     global race_data
     race_data = {}
     for race in races:
-        race_data.update({race["raceName"]: race["Circuit"]["circuitId"]})
+        race_data.update({race["raceName"]: race["round"]})
 
     return list(race_data.keys())
 
@@ -62,15 +62,25 @@ app.layout = html.Div(
                     id="circuit_map",
                     style={
                         "height": "350px",
-                        "width": "25%",
+                        "width": "35%",
                         "display": "inline=block",
                     },
                 ),
-                html.P(
-                    "HELLLO THIS IS TEstHELLLO THIS IS TEstHELLLO THIS IS TEstHELLLO THIS IS TEst",
-                    style={"display": "inline-block"},
+                html.Div(
+                    html.Div(
+                        html.H1("HELLLO"),
+                        style={"display": "table", "border": "solid #ffffff"},
+                    ),
+                    style={
+                        "height": "100%",
+                        "weight": "100%",
+                        "display": "inline-block",
+                        "border": "solid #32a1ce",
+                        "bg-color": "white",
+                    },
                 ),
             ]
+            # style={"width": "95%", "display": "inline-block"},
         ),
     ],
     style={"padding-left": "15px", "padding-top": "15px"},
@@ -90,11 +100,14 @@ def update_race_value(season_value):
 
 @app.callback(
     Output("circuit_map", "src"),
+    Input("season_dropdown", "value"),
     Input("race_dropdown", "value"),
     prevent_initial_call=True,
 )
-def update_circuitImg(race_value):
-    circuit_api = f"http://ergast.com/api/f1/circuits/{race_data[race_value]}.json"
+def update_circuitImg(season_value, race_value):
+    circuit_api = (
+        f"http://ergast.com/api/f1/{season_value}/{race_data[race_value]}/circuits.json"
+    )
     circuit = requests.get(circuit_api).json()["MRData"]["CircuitTable"]["Circuits"]
 
     name = circuit[0]["circuitId"]

@@ -1,5 +1,5 @@
 circuit map - circuit description - DONE
-race date including qualifying, p1,p2,p3 
+race data including qualifying, p1,p2,p3 
 no. of round in that season
 Winner's of the race.
 
