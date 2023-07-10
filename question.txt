@@ -28,8 +28,8 @@ Season:
             practice 1,2,3
         
         Graphs:
-            Lap time based on Tyre -> https://docs.fastf1.dev/examples_gallery/plot_laptimes_distribution.html#sphx-glr-examples-gallery-plot-laptimes-distribution-py
-            Lap comparison of podium racers -> https://docs.fastf1.dev/examples_gallery/plot_speed_traces.html#sphx-glr-examples-gallery-plot-speed-traces-py
+            Lap time based on Tyre -> DONE (CAN'T UNDERSTAND)
+            Lap comparison of podium racers -> DONE
             Position changes during a race -> https://docs.fastf1.dev/examples_gallery/plot_position_changes.html#sphx-glr-examples-gallery-plot-position-changes-py
             Weather data
             Track Status data
